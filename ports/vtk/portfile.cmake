@@ -69,6 +69,12 @@ if("atlmfc" IN_LIST FEATURES)
         -DVTK_MODULE_ENABLE_VTK_GUISupportMFC=YES
     )
 endif()
+if("debug-leaks" IN_LIST FEATURES)
+    if(VCPKG_BUILD_TYPE STREQUAL "debug" OR NOT VCPKG_BUILD_TYPE)
+        list(APPEND FEATURE_OPTIONS -DVTK_DEBUG_LEAKS=ON)
+        message(STATUS "VTK_DEBUG_LEAKS enabled for debug builds")
+    endif()
+endif()
 if("vtkm" IN_LIST FEATURES)
     list(APPEND ADDITIONAL_OPTIONS
         -DVTK_MODULE_ENABLE_VTK_AcceleratorsVTKmCore=YES
